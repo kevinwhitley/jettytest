@@ -32,7 +32,8 @@ public class ServletServer
         System.out.println("Starting ServletServer");
 
         ServletServer server = ServletServer.getServer();
-        server.init(DefaultPortNumber, "");
+        int portNumber = Integer.valueOf(System.getenv("PORT"));
+        server.init(portNumber, "");
         server.addTestServlets();
         server.run();
 
