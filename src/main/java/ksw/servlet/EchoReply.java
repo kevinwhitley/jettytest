@@ -38,7 +38,8 @@ public class EchoReply extends HttpServlet
 
         out.println("<br>");
         out.print("<form action=");
-        out.print(ServletServer.getServer().getAddress());
+        //out.print(ServletServer.getServer().getAddress());
+        out.print("/");
         out.print(EchoServlet.ServletName);
         out.println(" method=GET>");
         ServletHelp.writeButton(out, "doagain", "Again");

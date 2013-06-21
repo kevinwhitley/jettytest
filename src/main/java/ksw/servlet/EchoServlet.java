@@ -35,7 +35,8 @@ public class EchoServlet extends HttpServlet
         out.println("<h2>Please enter a word to be echoed<h2><br>");
 
         out.print("<form action=");
-        out.print(ServletServer.getServer().getAddress());
+        //out.print(ServletServer.getServer().getAddress());
+        out.print("/");
         out.print(EchoReply.ServletName);
         out.println(" method=POST>");
         out.println("Echo: ");
@@ -43,7 +44,6 @@ public class EchoServlet extends HttpServlet
         out.println("<br>");
         ServletHelp.writeButton(out, "doecho", "Echo");
         out.println("</form>");
-
         ServletHelp.writeFooter(out);
     }
 }
