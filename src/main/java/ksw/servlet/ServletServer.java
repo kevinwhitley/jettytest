@@ -32,7 +32,12 @@ public class ServletServer
         System.out.println("Starting ServletServer");
 
         ServletServer server = ServletServer.getServer();
-        int portNumber = Integer.valueOf(System.getenv("PORT"));
+        String portS = System.getenv("PORT");
+        int portNumber = DefaultPortNumber;
+        if (portS != null && portS.length() > 0) {
+            portNumber = Integer.valueOf(portS);
+        }
+
         server.init(portNumber, "");
         server.addTestServlets();
         server.run();
@@ -72,13 +77,21 @@ public class ServletServer
     public void init (int portNumber, String contextPath)
     {
         if (_inited) {
-            // we only allow initization once
+            // we only allow initialization once
             return;
         }
         _server = new Server(portNumber);
         _rootPath = getLocalAddress();
         if (portNumber != 80) {
-            _rootPath += ":" + portNumber;
+            // this is kind of funky
+            // we want the root path to include the port number when running on a home server
+            // but when running in heroku - we don't want the port number
+            // so see if we're at home:
+            String kevinVar = System.getenv("KEVIN");
+            if (kevinVar != null && kevinVar.length() > 0) {
+                _rootPath += ":" + portNumber;
+            }
+
         }
         _contextPath = contextPath;
 
