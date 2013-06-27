@@ -135,13 +135,13 @@ public class ServletServer
      * This method must be called before the server is started.
      *
      * @param srv  The servlet to be added
-     * @param servletName the name of the servlet
+     * @param servletName the name of the servlet (if null, then servlet handles "root" requests)
      * @return an error string, or null if no error
      */
     public String addServlet (Servlet srv, String servletName)
     {
         //Log.servlet.info("Adding internal servlet with contextPath %s", contextPath);
-        String contextPath = "/" + servletName + "/*";
+        String contextPath = (servletName != null) ? "/" + servletName + "/*" : "/*";
         _internalContext.addServlet(new ServletHolder(srv), contextPath);
 
         return null;

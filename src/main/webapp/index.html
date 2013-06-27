@@ -1,10 +1,159 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>Heroku test</title>
+<meta charset="utf-8">
+<title>Storiez</title>
+  <script src="/cl/jslib/jq/jquery-1.9.1.js"></script>
+  
+  
+<style>
+* {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+}
+
+body {
+    background-color: #eee;
+}
+
+#appHeader {
+    position: absolute;
+    height: 25px;
+    width: 100%;
+    background-color: #eed;
+}
+#appBody {
+    position: absolute;
+    top: 25px;
+    bottom: 25px;
+    width: 100%;
+    background-color: #aaa;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+#appFooter {
+    position: absolute;
+    height: 25px;
+    width: 100%;
+    bottom: 0px;
+    background-color: #ddf;
+}
+
+.textSection {
+    border: 1px solid black;
+    position: absolute;
+    left: -1000px;
+    top: 0px;
+    width: 0px;
+    height: 0px;
+    background-color: #eee;
+}
+.textSectionTitle {
+    text-align: center;
+    height: 24px;
+    line-height: 24px;
+    border-bottom: 1px solid black;
+}
+.textSectionMover {
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    width: 13px;
+    height: 13px;
+    background-color: black;
+}
+.textSectionContent {
+    position: absolute;
+    top: 25px;
+    bottom: 15px;
+    left: 0px;
+    right: 0px;
+    padding: 5px;
+    overflow-y: auto;
+    border-bottom: 1px solid black;
+}
+.textSectionFooter {
+    position: absolute;
+    height: 15px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+.textSectionSizer {
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    width: 13px;
+    bottom: 1px;
+    background-color: green;
+}
+
+</style>
+
 </head>
 <body>
-<div>
-Here is the content for the heroku test!! yay!
-</div>
+  <script type="text/x-handlebars" data-template-name="application">
+  <div id="appHeader">Storiez<div></div></div>
+  <div id="appBody">
+  {{outlet}}
+  </div>
+  <div id="appFooter">footer</div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="about">
+      about
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="index">
+      index
+  </script>
+
+<script type="text/x-handlebars" data-template-name="tests">
+    <h2>Tests:</h2>
+    {{#each model}}
+    <div>{{title}}</div>
+    {{/each}}
+</script>
+
+  <script type="text/x-handlebars" data-template-name="storiez">
+      <div>Your stories</div>
+      <div>
+        <ul>
+        {{#each storie in model}}
+        <li>{{#linkTo "storie" storie}}{{storie.title}}{{/linkTo}}</li>
+        {{/each}}
+        </ul>
+      </div>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="storie">
+      <div class="storieTitle">{{title}}</div>
+      {{#each section in textsections}}
+        {{render "textsection" section}}
+      {{/each}}
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="textsection">
+      <div class="textSection">
+      <div class="textSectionTitle">{{title}}
+          <div class="textSectionMover"></div>
+      </div>
+      <div class="textSectionContent">{{textcontent}}</div>
+      <div class="textSectionFooter">
+          <div class="textSectionSizer"></div>
+      </div>
+      </div>
+  </script>
+  
+
+</body>
+
+  <script src="/cl/jslib/ember/handlebars-1.0.0-rc.4.js"></script>
+  <script src="/cl/jslib/ember/ember-1.0.0-rc.4.js"></script>
+  <script src="/cl/jslib/ember/ember-data-0.13.js"></script>
+  <script src="/cl/jslib/ember/kwember.js"></script>
+  <script src="storiez.js"></script>
+
 </body>
 </html>

@@ -1,10 +1,6 @@
 package ksw.herokutest;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import ksw.servlet.FileReadServlet;
 import ksw.webserver.WebServer;
@@ -41,18 +37,23 @@ public class HTestServer
         _webserver.initialize(null, portNumber, null, null);
         
         // the content root varies, depending on whether we're in eclipse or not
-        String kevinVar = System.getenv("INECLIPSE");
-        String rootPath = null;
-        if (kevinVar != null && kevinVar.length() > 0) {
-            rootPath = "ksw/herokutest/content";
+        String inEclipseVar = System.getenv("INECLIPSE");
+        String contentPath = null;
+        String libPath = null;
+        if (inEclipseVar != null && inEclipseVar.length() > 0) {
+            contentPath = "ksw/herokutest/content";
+            libPath = "website/cl";
         }
         else {
-            rootPath = "src/main/webapp";
+            contentPath = "src/main/webapp";
+            libPath = "src/main/webapp/cl";
         }
 
-        File contentRoot = new File(rootPath);
+        File contentRoot = new File(contentPath);
         FileReadServlet fs = new FileReadServlet(contentRoot);
-        _webserver.addServlet(fs, "xx");
+        _webserver.addServlet(fs, null);
+        FileReadServlet fsLib = new FileReadServlet(new File(libPath));
+        _webserver.addServlet(fsLib, "cl");
     }
     
     private void run()
