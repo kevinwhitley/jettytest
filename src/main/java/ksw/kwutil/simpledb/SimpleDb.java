@@ -1,5 +1,6 @@
 package ksw.kwutil.simpledb;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,9 +33,10 @@ public abstract class SimpleDb
     public abstract void addCollection(Class theClass);
     public abstract void save(SimpleDbObject obj);
     
-    public abstract List<SimpleDbObject> findAll(Class theClass);
+    public abstract List findAll(Class theClass);
     public abstract SimpleDbObject find(Class theClass, Integer id);
-    public abstract List<SimpleDbObject> findWhere(Class theClass, String fieldName, Object value);
+    public abstract List findByIds(Class theClass, Collection<Integer> ids);
+    public abstract List findWhere(Class theClass, String fieldName, Object value);
     public abstract List findManyToManyFromLeft(Integer leftId, Class rightClass, Class manyToManyClass);
     public abstract List findManyToManyFromRight(Integer rightId, Class leftClass, Class manyToManyClass);
 

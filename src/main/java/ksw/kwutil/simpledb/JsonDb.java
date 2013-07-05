@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +72,7 @@ public class JsonDb extends SimpleDb
     }
     
     @Override
-    public List<SimpleDbObject> findAll(Class theClass)
+    public List findAll(Class theClass)
     {
         Map<Integer, SimpleDbObject> collection = _data.get(theClass);
         List<SimpleDbObject> result = new ArrayList<SimpleDbObject>(collection.size());
@@ -78,10 +80,29 @@ public class JsonDb extends SimpleDb
         
         return result;
     }
+    
+    @Override
+    public List findByIds(Class theClass, Collection<Integer> ids)
+    {
+        if (ids == null) {
+            return null;
+        }
+        Iterator<Integer> idIt = ids.iterator();
+        List<SimpleDbObject> result = new ArrayList<SimpleDbObject>(ids.size());
+        while(idIt.hasNext()) {
+            SimpleDbObject obj = find(theClass, idIt.next());
+            if (obj != null) {
+                result.add(obj);
+            }
+        }
+        
+        return result;
+    }
+
 
     // expensive reflection-based (full table scan) implementation of a search
     @Override
-    public List<SimpleDbObject> findWhere(Class theClass, String fieldName, Object value)
+    public List findWhere(Class theClass, String fieldName, Object value)
     {
         Map<Integer, SimpleDbObject> collection = _data.get(theClass);
         List<SimpleDbObject> result = new LinkedList<SimpleDbObject>();
@@ -157,6 +178,8 @@ public class JsonDb extends SimpleDb
         }
         
         // now get all instances of right class that have one of those ids
+        return findByIds(targetClass, hitIds);
+        /*
         List<SimpleDbObject> result = new LinkedList<SimpleDbObject>();
         collection = _data.get(targetClass);
         for (SimpleDbObject obj : collection.values()) {
@@ -166,6 +189,7 @@ public class JsonDb extends SimpleDb
         }
         
         return result;
+        */
     }
 
     // save an object into the database

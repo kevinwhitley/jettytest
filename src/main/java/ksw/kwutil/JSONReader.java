@@ -34,13 +34,13 @@ public class JSONReader
     // parse a JSON string
     // we'll hand back a value which may be of varying type - a null, or Integer, or Boolean or String
     // or List or Map (the latter two being nested arbitrarily)
-    public Object parse(String input) throws JSONParseException
+    public Object parse(CharSequence input) throws JSONParseException
     {
         if (input == null) {
             throw new JSONParseException("null input", null);
         }
         Object result = null;
-        _lexer.setInput(input);
+        _lexer.setInput(input.toString());
         // consume the input
         Object topValue = parseValue();
         // make sure we're at the end
@@ -832,7 +832,7 @@ public class JSONReader
 			char cc = 0;
 			int start = _index;
 			boolean escaping = false;
-			StringBuffer composedValue = null;  // in case we have to put together the value from escape sequences
+			StringBuilder composedValue = null;  // in case we have to put together the value from escape sequences
 			while (_index < _json.length()) {
 				cc = _json.charAt(_index++);
 				if (!escaping) {
@@ -843,7 +843,7 @@ public class JSONReader
 						// start of escape sequence
 						escaping = true;
 						if (composedValue == null) {
-							composedValue = new StringBuffer();
+							composedValue = new StringBuilder();
 							if (_index > start) {
 								composedValue.append(_json.substring(start, _index-1));
 							}

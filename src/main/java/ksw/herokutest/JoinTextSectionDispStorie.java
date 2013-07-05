@@ -3,30 +3,30 @@ package ksw.herokutest;
 import ksw.kwutil.simpledb.ManyToManyJoin;
 import ksw.kwutil.simpledb.SimpleDbObject;
 
-public class JoinTextSectionStorie extends SimpleDbObject implements ManyToManyJoin
+public class JoinTextSectionDispStorie extends SimpleDbObject implements ManyToManyJoin
 {
-    private Integer _textSectionId;
+    private Integer _textSectionDispId;
     private Integer _storieId;
 
-    public JoinTextSectionStorie()
+    public JoinTextSectionDispStorie()
     {
         
     }
     
-    public JoinTextSectionStorie(Integer textSectionId, Integer storieId)
+    public JoinTextSectionDispStorie(Integer textSectionId, Integer storieId)
     {
-        _textSectionId = textSectionId;
+        _textSectionDispId = textSectionId;
         _storieId = storieId;
     }
 
     public void setTextSectionId(Integer val)
     {
-        _textSectionId = val;
+        _textSectionDispId = val;
     }
     
     public Integer getTextSectionId()
     {
-        return _textSectionId;
+        return _textSectionDispId;
     }
 
     public void setStorieId(Integer val)
@@ -42,7 +42,7 @@ public class JoinTextSectionStorie extends SimpleDbObject implements ManyToManyJ
     @Override
     public Integer leftId()
     {
-        return _textSectionId;
+        return _textSectionDispId;
     }
 
     @Override

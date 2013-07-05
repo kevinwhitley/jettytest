@@ -98,7 +98,11 @@ body {
   <div id="appBody">
   {{outlet}}
   </div>
-  <div id="appFooter">footer</div>
+  <div id="appFooter">
+      footer
+      <button class="editButton" {{action "commitData"}}>commit</button>
+      <button class="editButton" {{action "rollbackData"}}>rollback</button>
+    </div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="about">
@@ -108,13 +112,6 @@ body {
   <script type="text/x-handlebars" data-template-name="index">
       index
   </script>
-
-<script type="text/x-handlebars" data-template-name="tests">
-    <h2>Tests:</h2>
-    {{#each model}}
-    <div>{{title}}</div>
-    {{/each}}
-</script>
 
   <script type="text/x-handlebars" data-template-name="storiez">
       <div>Your stories</div>
@@ -128,18 +125,36 @@ body {
   </script>
   
   <script type="text/x-handlebars" data-template-name="storie">
-      <div class="storieTitle">{{title}}</div>
-      {{#each section in textsections}}
-        {{render "textsection" section}}
+      <div class="storieTitle">
+        {{view App.KWEditView txtBinding="title" doeditBinding="titleEdit"}}
+      </div>
+      {{#each disp in textsectiondisps}}
+        {{render "textsectiondisp" disp}}
       {{/each}}
   </script>
   
-  <script type="text/x-handlebars" data-template-name="textsection">
+  <!-- the 'model' passed to kwedit is the single value we want to display or edit -->
+  <script type="text/x-handlebars" data-template-name="KWEdit">
+    {{#if view.doedit}}
+      {{view Ember.TextField valueBinding=view.txt}}
+    {{else}}
+      {{view.txt}}
+    {{/if}}
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="textsectiondisp">
       <div class="textSection">
-      <div class="textSectionTitle">{{title}}
+      <div class="textSectionTitle">
+         {{view App.KWEditView txtBinding="textsection.title" doeditBinding="textsection.titleEdit"}}
           <div class="textSectionMover"></div>
       </div>
-      <div class="textSectionContent">{{textcontent}}</div>
+      <div class="textSectionContent">
+      {{#if contentEdit}}
+        {{view Ember.TextArea valueBinding="textsection.textcontent"}}
+      {{else}}
+        {{view Ember.TextArea valueBinding="textsection.textcontent"}}
+      {{/if}}
+      </div>
       <div class="textSectionFooter">
           <div class="textSectionSizer"></div>
       </div>
@@ -152,8 +167,8 @@ body {
   <script src="/cl/jslib/ember/handlebars-1.0.0-rc.4.js"></script>
   <script src="/cl/jslib/ember/ember-1.0.0-rc.4.js"></script>
   <script src="/cl/jslib/ember/ember-data-0.13.js"></script>
-  <script src="/cl/jslib/ember/kwember.js"></script>
   <script src="storiez.js"></script>
+  <script src="storiemodels.js"></script>
 
 </body>
 </html>

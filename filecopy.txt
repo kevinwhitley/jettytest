@@ -2,10 +2,16 @@
 sourcebase: /Users/kevin/zkevins/program/trunk/
 destbase: /Users/kevin/zkevins/program/jheroku/src/main/java/
 
-ksw/herokutest/HTestServer.java ksw/herokutest/HTestServer.java
-ksw/herokutest/JoinTextSectionStorie.java ksw/herokutest/JoinTextSectionStorie.java
+ksw/herokutest/JoinTextSectionDispStorie.java ksw/herokutest/JoinTextSectionDispStorie.java
+ksw/herokutest/RestAndResourceServer.java ksw/herokutest/RestAndResourceServer.java
+ksw/herokutest/RestHandler.java ksw/herokutest/RestHandler.java
 ksw/herokutest/Storie.java ksw/herokutest/Storie.java
+ksw/herokutest/StorieRequestHandler.java ksw/herokutest/StorieRequestHandler.java
+ksw/herokutest/StoriezServer.java ksw/herokutest/StoriezServer.java
 ksw/herokutest/TextSection.java ksw/herokutest/TextSection.java
+ksw/herokutest/TextSectionDisp.java ksw/herokutest/TextSectionDisp.java
+ksw/herokutest/TextSectionDispRequestHandler.java ksw/herokutest/TextSectionDispRequestHandler.java
+ksw/herokutest/TextSectionRequestHandler.java ksw/herokutest/TextSectionRequestHandler.java
 ksw/herokutest/User.java ksw/herokutest/User.java
 ksw/herokutest/test.jsd ksw/herokutest/test.jsd
 
@@ -21,18 +27,18 @@ ksw/kwutil/Owt.java ksw/kwutil/Owt.java
 ksw/kwutil/StringUtil.java ksw/kwutil/StringUtil.java
 ksw/kwutil/simpledb/ ksw/kwutil/simpledb/
 
-ksw/servlet/AppCookie.java ksw/servlet/AppCookie.java
-ksw/servlet/AppRequest.java ksw/servlet/AppRequest.java
-ksw/servlet/AppServlet.java ksw/servlet/AppServlet.java
-ksw/servlet/EchoReply.java ksw/servlet/EchoReply.java
-ksw/servlet/EchoServlet.java ksw/servlet/EchoServlet.java
-ksw/servlet/FileReadServlet.java ksw/servlet/FileReadServlet.java
-ksw/servlet/ServletHelp.java ksw/servlet/ServletHelp.java
-ksw/servlet/ServletPage.java ksw/servlet/ServletPage.java
-ksw/servlet/ServletParameters.java ksw/servlet/ServletParameters.java
-ksw/servlet/ServletServer.java ksw/servlet/ServletServer.java
+#ksw/servlet/AppCookie.java ksw/servlet/AppCookie.java
+#ksw/servlet/AppRequest.java ksw/servlet/AppRequest.java
+#ksw/servlet/AppServlet.java ksw/servlet/AppServlet.java
+#ksw/servlet/EchoReply.java ksw/servlet/EchoReply.java
+#ksw/servlet/EchoServlet.java ksw/servlet/EchoServlet.java
+#ksw/servlet/FileReadServlet.java ksw/servlet/FileReadServlet.java
+#ksw/servlet/ServletHelp.java ksw/servlet/ServletHelp.java
+#ksw/servlet/ServletPage.java ksw/servlet/ServletPage.java
+#ksw/servlet/ServletParameters.java ksw/servlet/ServletParameters.java
+#ksw/servlet/ServletServer.java ksw/servlet/ServletServer.java
 
-ksw/webserver/WebServer.java ksw/webserver/WebServer.java
+#ksw/webserver/WebServer.java ksw/webserver/WebServer.java
 
 destbase: /Users/kevin/zkevins/program/jheroku/src/main/
 ksw/herokutest/content/ webapp/
