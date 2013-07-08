@@ -18,6 +18,7 @@ App.KWEditView = Ember.View.extend({
         if (!isEditing) {
             var newText = this.get('_editText');
             if (newText !== this.get('txt')) {
+                //console.log('editview done with: ' + newText);
                 this.get('fn')(newText);
             }
         }
@@ -47,7 +48,6 @@ App.KWEditViewArea = Ember.View.extend({
         this.set('isEditing', isE);
         if (isE) {
             var ta = this.$().find('textarea');
-            console.log('area: ' + ta);
             ta.focus();
             var len = this.get('txt').length;
             setTextSelection(ta[0], len, len);

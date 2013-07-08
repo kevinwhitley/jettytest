@@ -167,7 +167,7 @@ body {
 <!--  widgets  -->
 <script type="text/x-handlebars" data-template-name="KWEdit">
     {{#if view.isEditing}}
-        {{view Ember.TextField valueBinding=view.editText}}
+        {{view Ember.TextField valueBinding="view.editText"}}
     {{else}}
         {{view.txt}}
     {{/if}}

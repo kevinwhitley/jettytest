@@ -78,6 +78,7 @@ Storiez.prototype._doAction = function(undo)
 
 Storiez.prototype._opSetValue = function(obj, key, value)
 {
+    //console.log('setvalue of ' + key + ' to ' + value);
     obj.set(key, value);
 };
 

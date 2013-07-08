@@ -94,7 +94,7 @@ App.StorieView = Ember.View.extend({
     reshapeElement: function() {
         //$('.textSection').css({backgroundColor: 'yellow'});
         var title = this.get('controller').get('title');
-        console.log('storie ' + title);
+        //console.log('storie ' + title);
     }
 });
 
@@ -176,7 +176,7 @@ App.TextsectiondispView = Ember.View.extend({
             $('body').on('mouseup.StorieSize', null, function(event) {return self.sizeMouseUp(event);});
             $('body').on('mousemove.StorieSize', null, function(event) {return self.sizeMouseMove(event);});
         }
-        return false;
+        return true;
     },
     moveMouseUp: function(event) {
         $('body').off('mouseup.StorieMove mousemove.StorieMove', null);
@@ -184,10 +184,7 @@ App.TextsectiondispView = Ember.View.extend({
         this.moveMouseMove(event);
         var geometry = this._moveGeometry(event, moveInfo);
         moveInfo.moving = false;
-        console.log('done move');
         var controller = this.get('controller');
-        //controller.set('left', geometry.left);
-        //controller.set('top', geometry.top);
         App.storiez.reshape(controller, this.$(), {
             left: geometry.left,
             top: geometry.top,
@@ -219,10 +216,7 @@ App.TextsectiondispView = Ember.View.extend({
         this.sizeMouseMove(event);
         sizeInfo.sizing = false;
         var geometry = this._sizeGeometry(event, sizeInfo);
-        console.log('done size');
         var controller = this.get('controller');
-        //controller.set('width', geometry.width);
-        //controller.set('height', geometry.height);
         App.storiez.reshape(controller, this.$(), {
             left: controller.get('left'),
             top: controller.get('top'),
@@ -235,11 +229,6 @@ App.TextsectiondispView = Ember.View.extend({
         var sizeInfo = this.get('sizeInfo');
         if (sizeInfo.sizing) {
             var geometry = this._sizeGeometry(event, sizeInfo);
-            //var width = sizeInfo.originalWidth + event.pageX - sizeInfo.downLeft;
-            //var height = sizeInfo.originalHeight + event.pageY - sizeInfo.downTop;
-            //var controller = this.get('controller');
-            //controller.set('width', width);
-            //controller.set('height', height);
             this.$().css({width: geometry.width, height: geometry.height});
         }
         return false;
