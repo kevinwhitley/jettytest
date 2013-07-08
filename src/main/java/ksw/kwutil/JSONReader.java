@@ -552,11 +552,11 @@ public class JSONReader
 	
 	public static void main(String[] args)
 	{
-        //test("[6, 7, true, \"my cat\", [\"embedded\", false, \"abc\\u002dxyz\"], 222]");
+        test("[6, 7, true, \"my cat\\nisblack\", [\"embedded\", false, \"abc\\u002dxyz\"], 222]");
         //test("{\"forframe\": [\"/thumbnail/photos03/nk102603/DSCN3533.JPG\", \"/thumbnail/photos03/nk102603/DSCN3534.JPG\", \"/thumbnail/photos03/nk102603/DSCN3535.JPG\", \"/thumbnail/photos03/nk102603/DSCN3537.JPG\", \"/thumbnail/photos03/nk102603/DSCN3539.JPG\", \"/thumbnail/photos03/nk102603/DSCN3549.JPG\"], \"hoai_thu\": [\"/thumbnail/photos03/nk102603/DSCN3534.JPG\", \"/thumbnail/photos03/nk102603/DSCN3536.JPG\", \"/thumbnail/photos03/nk102603/DSCN3550.JPG\"], \"kfamily\": [\"/thumbnail/photos03/nk102603/DSCN3533.JPG\", \"/thumbnail/photos03/nk102603/DSCN3534.JPG\", \"/thumbnail/photos03/nk102603/DSCN3535.JPG\", \"/thumbnail/photos03/nk102603/DSCN3537.JPG\", \"/thumbnail/photos03/nk102603/DSCN3539.JPG\", \"/thumbnail/photos03/nk102603/DSCN3543.JPG\", \"/thumbnail/photos03/nk102603/DSCN3549.JPG\", \"/thumbnail/photos03/nk102603/DSCN3550.JPG\"], \"peter\": [\"/thumbnail/photos03/nk102603/DSCN3558.JPG\", \"/thumbnail/photos03/nk102603/DSCN3560.JPG\"]}");
         //test("{}");
 	    //test("{\"kevin\": {\"editType\": null,\"tags\": [\"hoai-thu\",\"kevin\",\"david\",\"peter\",\"htfamily\",\"kfamily\",\"&testtest\",\"abstract\",\"fountain\"]}}");
-	    testObject("{\"aa\": \"fish\", \"bb\": 33, \"cc\": true, \"names\": [\"joe\", \"mary\"]}");
+	    //testObject("{\"aa\": \"fish\", \"bb\": 33, \"cc\": true, \"names\": [\"joe\", \"mary\"]}");
 	    
 		//parameterTest();
 	    // fieldTest(TestRead.class);
@@ -637,7 +637,7 @@ public class JSONReader
 		}
 	}
 	
-	private static void testObject(String testString)
+	public static void testObject(String testString)
 	{
 		System.out.println("Testing JSONReader with input:");
 		System.out.println(testString);
@@ -653,7 +653,7 @@ public class JSONReader
 		
 	}
 	
-	private static void printValue(int depth, Object value)
+	public static void printValue(int depth, Object value)
 	{
 		printIndent(depth);
 		if (value == null) {
@@ -776,7 +776,7 @@ public class JSONReader
 					break;
 				}
 			}
-			if (cc == 0) {
+			if (cc == 0 || Character.isWhitespace(cc)) {
 				// we hit the end of the input
 				return JSONToken.JsEnd;
 			}

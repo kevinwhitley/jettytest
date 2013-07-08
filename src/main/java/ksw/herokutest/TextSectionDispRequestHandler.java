@@ -1,34 +1,15 @@
 package ksw.herokutest;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
-import ksw.kwutil.JSONWriter.JSONWriteException;
-import ksw.kwutil.simpledb.JsonDb;
+import ksw.kwutil.simpledb.SimpleDb;
 
-public class TextSectionDispRequestHandler extends RestHandler
+public class TextSectionDispRequestHandler extends SimpleDbRestHandler
 {
 
-    private JsonDb _db;
-    
-    public TextSectionDispRequestHandler(JsonDb db)
+    public TextSectionDispRequestHandler(SimpleDb db)
     {
-        _db = db;
-    }
-
-    
-    @Override
-    public void commitEdit()
-    {
-        try {
-            _db.write();
-        } catch (JSONWriteException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        super(db, TextSectionDisp.class);
     }
 
     @Override
@@ -42,29 +23,4 @@ public class TextSectionDispRequestHandler extends RestHandler
     {
         return null;
     }
-
-    @Override
-    public void delete(int docId)
-    {
-    }
-
-    @Override
-    public ClientJSON find(int docId)
-    {
-        return (ClientJSON)_db.find(TextSectionDisp.class, docId);
-    }
-
-    @Override
-    public List<ClientJSON> findAll()
-    {
-        return (List<ClientJSON>)_db.findAll(TextSectionDisp.class);
-    }
-
-    @Override
-    public List<ClientJSON> findByIds(Collection<Integer> ids)
-    {
-        List<ClientJSON> ts = (List<ClientJSON>)_db.findByIds(TextSectionDisp.class, ids);
-        return ts;
-    }
-
 }

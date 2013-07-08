@@ -21,7 +21,7 @@ public class JSONWriter
     	try {
 	        JSONWriter js = new JSONWriter();
 	        js.startObject();
-	        js.addItem("comment", "ts xceptional");
+	        js.addItem("comment", "ts Ã©xceptional");
 	        js.addItem("rank", "jack");
 	        js.addItem("tw", tw);
 	        js.addItem("suit", "hearts");
@@ -380,6 +380,27 @@ public class JSONWriter
                 if (cc == '"') {
                     _out.append('\\');
                     _out.append(cc);
+                }
+                else if (cc == '\\') {
+                    _out.append("\\\\");
+                }
+                else if (cc == '/') {
+                    _out.append("\\/");
+                }
+                else if (cc == '\b') {
+                    _out.append("\\b");
+                }
+                else if (cc == '\f') {
+                    _out.append("\\f");
+                }
+                else if (cc == '\n') {
+                    _out.append("\\n");
+                }
+                else if (cc == '\r') {
+                    _out.append("\\r");
+                }
+                else if (cc == '\t') {
+                    _out.append("\\t");
                 }
                 else if (ic > 0x7f) {
                     _out.append("\\u");

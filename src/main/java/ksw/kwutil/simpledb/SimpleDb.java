@@ -1,5 +1,6 @@
 package ksw.kwutil.simpledb;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +34,9 @@ public abstract class SimpleDb
     public abstract void addCollection(Class theClass);
     public abstract void save(SimpleDbObject obj);
     
+    // write any in-memory version to persistent storage
+    public void persistToStorage() throws IOException {}
+    
     public abstract List findAll(Class theClass);
     public abstract SimpleDbObject find(Class theClass, Integer id);
     public abstract List findByIds(Class theClass, Collection<Integer> ids);
@@ -40,5 +44,8 @@ public abstract class SimpleDb
     public abstract List findManyToManyFromLeft(Integer leftId, Class rightClass, Class manyToManyClass);
     public abstract List findManyToManyFromRight(Integer rightId, Class leftClass, Class manyToManyClass);
 
+    public abstract void delete(SimpleDbObject obj);
+    public abstract void delete(Class theClass, Integer id);
+    
     public abstract Object getNextNonce();
 }

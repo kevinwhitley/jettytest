@@ -73,6 +73,22 @@ body {
     overflow-y: auto;
     border-bottom: 1px solid black;
 }
+
+/* style of content while editing: */
+.textSectionContent .kweditarea, .textSectionContent .kweditarea textarea {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    padding: 5px;
+    font: 12px arial,sans-serif;
+    background-color: transparent;
+}
+.textSectionContent .is-editing {
+    background-color: white;
+}
+
 .textSectionFooter {
     position: absolute;
     height: 15px;
@@ -100,8 +116,9 @@ body {
   </div>
   <div id="appFooter">
       footer
-      <button class="editButton" {{action "commitData"}}>commit</button>
-      <button class="editButton" {{action "rollbackData"}}>rollback</button>
+      <button class="editButton" {{action "commitData"}}>save</button>
+      <button class="editButton" {{action "executeUndo"}}>undo</button>
+      <button class="editButton" {{action "executeRedo"}}>redo</button>
     </div>
   </script>
 
@@ -133,34 +150,32 @@ body {
       {{/each}}
   </script>
   
-  <!-- the 'model' passed to kwedit is the single value we want to display or edit -->
-  <script type="text/x-handlebars" data-template-name="KWEdit">
-    {{#if view.doedit}}
-      {{view Ember.TextField valueBinding=view.txt}}
-    {{else}}
-      {{view.txt}}
-    {{/if}}
-  </script>
-  
   <script type="text/x-handlebars" data-template-name="textsectiondisp">
-      <div class="textSection">
       <div class="textSectionTitle">
-         {{view App.KWEditView txtBinding="textsection.title" doeditBinding="textsection.titleEdit"}}
+         {{view App.KWEditView txtBinding="textsection.title" fnBinding="textsection.changeTitle" isEditingBinding="textsection.titleEdit"}}
           <div class="textSectionMover"></div>
       </div>
       <div class="textSectionContent">
-      {{#if contentEdit}}
-        {{view Ember.TextArea valueBinding="textsection.textcontent"}}
-      {{else}}
-        {{view Ember.TextArea valueBinding="textsection.textcontent"}}
-      {{/if}}
+        {{view App.KWEditViewArea txtBinding="textsection.textcontent" fnBinding="textsection.changeContent" isEditingBinding="textsection.contentEdit"}}
       </div>
       <div class="textSectionFooter">
           <div class="textSectionSizer"></div>
       </div>
-      </div>
   </script>
   
+
+<!--  widgets  -->
+<script type="text/x-handlebars" data-template-name="KWEdit">
+    {{#if view.isEditing}}
+        {{view Ember.TextField valueBinding=view.editText}}
+    {{else}}
+        {{view.txt}}
+    {{/if}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="KWEditArea">
+    {{view Ember.TextArea valueBinding=view.editText disabledBinding=view.isDisabled}}
+</script>
 
 </body>
 
@@ -168,7 +183,9 @@ body {
   <script src="/cl/jslib/ember/ember-1.0.0-rc.4.js"></script>
   <script src="/cl/jslib/ember/ember-data-0.13.js"></script>
   <script src="storiez.js"></script>
+  <script src="storiezui.js"></script>
   <script src="storiemodels.js"></script>
+  <script src="kwwidgets.js"></script>
 
 </body>
 </html>

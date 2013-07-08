@@ -27,5 +27,14 @@ App.Textsectiondisp = DS.Model.extend({
 
 App.Textsection = DS.Model.extend({
     title: DS.attr('string'),
-    textcontent: DS.attr('string')
+    textcontent: DS.attr('string'),
+    
+    changeTitle: function() {
+        var self = this;
+        return function(toTitle) {App.storiez.changeValue(self, 'title', toTitle);}
+    }.property('title'),
+    changeContent: function() {
+        var self = this;
+        return function(content) {App.storiez.changeValue(self, 'textcontent', content);}
+    }.property('textcontent')
 });

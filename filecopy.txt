@@ -5,6 +5,7 @@ destbase: /Users/kevin/zkevins/program/jheroku/src/main/java/
 ksw/herokutest/JoinTextSectionDispStorie.java ksw/herokutest/JoinTextSectionDispStorie.java
 ksw/herokutest/RestAndResourceServer.java ksw/herokutest/RestAndResourceServer.java
 ksw/herokutest/RestHandler.java ksw/herokutest/RestHandler.java
+ksw/herokutest/SimpleDbRestHandler.java ksw/herokutest/SimpleDbRestHandler.java
 ksw/herokutest/Storie.java ksw/herokutest/Storie.java
 ksw/herokutest/StorieRequestHandler.java ksw/herokutest/StorieRequestHandler.java
 ksw/herokutest/StoriezServer.java ksw/herokutest/StoriezServer.java

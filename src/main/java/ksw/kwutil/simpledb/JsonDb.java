@@ -192,6 +192,24 @@ public class JsonDb extends SimpleDb
         */
     }
 
+    // does not guarantee persistence!  a call to write() is needed
+    @Override
+    public void delete(SimpleDbObject obj)
+    {
+        delete(obj.getClass(), obj.getId());
+    }
+
+    // does not guarantee persistence!  a call to write() is needed
+    @Override
+    public void delete(Class theClass, Integer id)
+    {
+        Map<Integer, SimpleDbObject> collection = _data.get(theClass);
+        if (collection == null) {
+            System.err.println("delete - no collection for class " + theClass.getCanonicalName());
+        }
+        collection.remove(id);
+    }
+
     // save an object into the database
     // this does not guarantee persistence!  a call to write() is needed
     public void save(SimpleDbObject obj)
@@ -206,9 +224,21 @@ public class JsonDb extends SimpleDb
         // and actually put into the data structure
         Map<Integer, SimpleDbObject> collection = _data.get(obj.getClass());
         if (collection == null) {
-            System.err.println("no collection for class " + obj.getClass().getCanonicalName());
+            System.err.println("save - no collection for class " + obj.getClass().getCanonicalName());
         }
         collection.put(obj.getId(), obj);
+    }
+
+    @Override
+    public void persistToStorage() throws IOException
+    {
+        try {
+            write(null);
+        }
+        catch (JSONWriteException jexc) {
+            // convert to IOException
+            throw new IOException("JSONWriteException: ", jexc);
+        }
     }
 
     // write the database out to the same file it was read from
